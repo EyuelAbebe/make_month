@@ -44,14 +44,18 @@ if __name__ == '__main__':
         date = random.choice([i+1 for i in range(31)])
 
         if month == 2 and leap_year(year):
-            date = date % 29
+            if date != 29:
+                date = date % 29 
         elif month == 2:
-            date = date % 28
+            if date != 28:
+                date = date % 28
+        elif month in [4, 6, 9, 11]:
+            if date != 30:
+                date = date % 30 
 
         day = datetime.date(year, month, date).strftime("%A").lower()
         m_m_day = make_month(year, month).day(date).lower()
 
-        print day, m_m_day, year, month, date
         if day != m_m_day:
             print "Test Fails."
             sys.exit()
